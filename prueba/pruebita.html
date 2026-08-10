@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive 3D Solar System - explore the planets of our solar system with realistic orbital animations.">
+    <title>Solar System Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Starfield Canvas -->
+    <canvas id="starfield"></canvas>
+
+    <!-- UI Header -->
+    <header class="hud-header">
+        <div class="hud-logo">
+            <span class="logo-icon">&#9728;</span>
+            <h1>Solar System <span>Explorer</span></h1>
+        </div>
+        <div class="hud-controls">
+            <label class="control-item">
+                <span>Speed</span>
+                <input type="range" id="speedSlider" min="0" max="5" step="0.1" value="1">
+            </label>
+            <button class="btn-hud" id="toggleOrbits">Orbits ON</button>
+            <button class="btn-hud" id="togglePause">&#9646;&#9646; Pause</button>
+        </div>
+    </header>
+
+    <!-- Solar System Scene -->
+    <main class="solar-scene" id="solarScene">
+        <div class="perspective-wrapper">
+            <div class="solar-system" id="solarSystem">
+
+                <!-- Sun -->
+                <div class="sun-wrapper">
+                    <div class="sun" id="sun">
+                        <div class="sun-corona"></div>
+                        <div class="sun-flare f1"></div>
+                        <div class="sun-flare f2"></div>
+                        <div class="sun-flare f3"></div>
+                    </div>
+                </div>
+
+                <!-- Mercury -->
+                <div class="orbit" id="orbit-mercury" style="--orbit-size: 160px; --duration: 4s; --tilt: 7deg;">
+                    <div class="orbit-ring"></div>
+                    <div class="planet-wrapper">
+                        <div class="planet mercury" data-name="Mercury" data-desc="Smallest planet. Surface temperatures range from -180°C to 430°C." data-dist="57.9M km" data-moons="0" data-year="88 days"></div>
+                    </div>
+                </div>
+
+                <!-- Venus -->
+                <div class="orbit" id="orbit-venus" style="--orbit-size: 240px; --duration: 10s; --tilt: 3deg;">
+                    <div class="orbit-ring"></div>
+                    <div class="planet-wrapper">
+                        <div class="planet venus" data-name="Venus" data-desc="Hottest planet with a thick toxic atmosphere of CO2." data-dist="108.2M km" data-moons="0" data-year="225 days"></div>
+                    </div>
+                </div>
+
+                <!-- Earth -->
+                <div class="orbit" id="orbit-earth" style="--orbit-size: 330px; --duration: 16s; --tilt: 0deg;">
+                    <div class="orbit-ring"></div>
+                    <div class="planet-wrapper">
+                        <div class="planet earth" data-name="Earth" data-desc="Our home. The only known planet with life in the universe." data-dist="149.6M km" data-moons="1" data-year="365 days">
+                            <div class="moon-orbit">
+                                <div class="moon"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mars -->
+                <div class="orbit" id="orbit-mars" style="--orbit-size: 430px; --duration: 30s; --tilt: 1deg;">
+                    <div class="orbit-ring"></div>
+                    <div class="planet-wrapper">
+                        <div class="planet mars" data-name="Mars" data-desc="The Red Planet with the tallest volcano in the solar system: Olympus Mons." data-dist="227.9M km" data-moons="2" data-year="687 days"></div>
+                    </div>
+                </div>
+
+                <!-- Jupiter -->
+                <div class="orbit" id="orbit-jupiter" style="--orbit-size: 570px; --duration: 80s; --tilt: 1.3deg;">
+                    <div class="orbit-ring"></div>
+                    <div class="planet-wrapper">
+                        <div class="planet jupiter" data-name="Jupiter" data-desc="Largest planet. The Great Red Spot is a storm older than 350 years." data-dist="778.5M km" data-moons="95" data-year="12 years"></div>
+                    </div>
+                </div>
+
+                <!-- Saturn -->
+                <div class="orbit" id="orbit-saturn" style="--orbit-size: 720px; --duration: 140s; --tilt: 2deg;">
+                    <div class="orbit-ring"></div>
+                    <div class="planet-wrapper">
+                        <div class="planet saturn" data-name="Saturn" data-desc="Famous for its spectacular ring system made of ice and rock debris." data-dist="1.43B km" data-moons="146" data-year="29 years">
+                            <div class="saturn-rings"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Uranus -->
+                <div class="orbit" id="orbit-uranus" style="--orbit-size: 860px; --duration: 200s; --tilt: 0.8deg;">
+                    <div class="orbit-ring"></div>
+                    <div class="planet-wrapper">
+                        <div class="planet uranus" data-name="Uranus" data-desc="Rotates on its side with an axial tilt of 98 degrees. An ice giant." data-dist="2.87B km" data-moons="27" data-year="84 years"></div>
+                    </div>
+                </div>
+
+                <!-- Neptune -->
+                <div class="orbit" id="orbit-neptune" style="--orbit-size: 990px; --duration: 300s; --tilt: 1.8deg;">
+                    <div class="orbit-ring"></div>
+                    <div class="planet-wrapper">
+                        <div class="planet neptune" data-name="Neptune" data-desc="Farthest planet with the strongest winds in the solar system." data-dist="4.50B km" data-moons="16" data-year="165 years"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Planet Info Tooltip -->
+    <div class="planet-tooltip" id="planetTooltip">
+        <div class="tooltip-header">
+            <div class="tooltip-planet-icon" id="tooltipIcon"></div>
+            <h2 id="tooltipName">Planet</h2>
+        </div>
+        <p id="tooltipDesc"></p>
+        <div class="tooltip-stats">
+            <div class="stat">
+                <span class="stat-label">Distance</span>
+                <span class="stat-value" id="tooltipDist"></span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Moons</span>
+                <span class="stat-value" id="tooltipMoons"></span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Orbital Period</span>
+                <span class="stat-value" id="tooltipYear"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer HUD -->
+    <footer class="hud-footer">
+        <span>&#x1F30C; Hover over a planet to learn more</span>
+        <span>Use the slider to control orbital speed</span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
