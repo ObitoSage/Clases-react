@@ -15,3 +15,10 @@ jobs:
         run: pwd
       - name: Listado de archivos
         run: ls -la
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+      - name: Verificar version de Node
+        run: node --version
+      - name: Verificar version de npm
+        run: npm --version
+      
