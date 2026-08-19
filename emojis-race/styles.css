@@ -1,0 +1,72 @@
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 1.25rem;
+}
+
+h1 {
+    font-size: 1.75rem;
+}
+
+#largada {
+    display: none;
+}
+
+.boton {
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+    margin-bottom: 0.75rem;
+    border: 0.125rem solid #222222;
+    border-radius: 0.5rem;
+    background-color: #201f1f;
+    color: #dfdada;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.map {
+    position: relative;
+    width: 56.25rem;
+    height: 16.875rem;
+    border: 0.1875rem solid #000000;
+    border-radius: 0.75rem;
+    background-color: #405b5c;
+}
+
+
+.lane {
+    height: 5.625rem;
+}
+.meta {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1rem;
+    border-left: 0.5rem dashed #ffffff;
+}
+
+.car {
+    position: relative;
+    left: 0;
+    width: 2rem;
+    margin-left: 0.625rem;
+    font-size: 2rem;
+    line-height: 5.625rem;
+}
+
+.tortuga {
+    transition: left 5s;
+}
+
+.gato {
+    transition: left 3s;
+}
+
+.cohete {
+    transition: left 1s;
+}
+
+
+#largada:checked ~ .map .car {
+    left: 52rem;
+}
