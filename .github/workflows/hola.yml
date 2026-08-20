@@ -17,9 +17,11 @@ jobs:
         run: ls -la
       - name: Instalar Node
         uses: actions/setup-node@v4
+      - name: Instalar dependencias
+        run: npm ci
       - name: Verificar version de Node
         run: node --version
       - name: Verificar version de npm
         run: npm --version
       - name: check JS
-        run: npm run check:js 
+        run: npm run check:js
