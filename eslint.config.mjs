@@ -3,7 +3,7 @@ import globals from 'globals';
 export default [
 {
     files: ['**/*.js'],
-    languajeOptions: {
+    languageOptions: {
         globals: globals.browser
     }
 },
