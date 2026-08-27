@@ -15,7 +15,7 @@ jobs:
       - name: Instalar Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Ir a la carpeta del proyecto
         run: cd SecondMidterm_Exam/class17/tres-en-raya && pwd
@@ -38,13 +38,8 @@ jobs:
         run: npm run build
         working-directory: SecondMidterm_Exam/class17/tres-en-raya
 
-      - name: Guardar resultado del build
+      - name: Guardar resultado como ZIP
         uses: actions/upload-artifact@v4
         with:
           name: tres-en-raya-build
           path: SecondMidterm_Exam/class17/tres-en-raya/dist
-      - name: Guardar ZIP
-        uses: actions/upload-artifact@v4
-        with:
-          name: aplicacion-web
-          path: 2doParcial/Class17/tres-en-raya/dist
