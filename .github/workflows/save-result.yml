@@ -34,12 +34,8 @@ jobs:
         run: npm run lint
         working-directory: SecondMidterm_Exam/class17/tres-en-raya
 
-      - name: Build TypeScript
-        run: npx tsc -b
-        working-directory: SecondMidterm_Exam/class17/tres-en-raya
-
-      - name: Vite build
-        run: npx vite build
+      - name: Build del proyecto
+        run: npm run build
         working-directory: SecondMidterm_Exam/class17/tres-en-raya
 
       - name: Guardar resultado del build
