@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export default function contador (){
+export default function Contador (){
     const [contador, setContador] = useState<number>(0);
 
     const contar = () : void => {

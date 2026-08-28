@@ -3,7 +3,7 @@ export default function keysExamples(){
         return a+b
     }
     const add = adition(3,4)
-    const message: String = "Hello UPB"
+    const message: string = "Hello UPB"
     return (
         <section>
             <h1> {message} </h1>
