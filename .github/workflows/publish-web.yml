@@ -1,0 +1,58 @@
+name: Publish Web
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Verificar version de Node
+        run: node --version
+
+      - name: Verificar version de npm
+        run: npm --version
+
+      - name: Instalar dependencias
+        run: npm ci
+        working-directory: SecondMidterm_Exam/class18/contador
+
+      - name: Lint del proyecto
+        run: npm run lint
+        working-directory: SecondMidterm_Exam/class18/contador
+
+      - name: Build del proyecto
+        run: npm run build
+        working-directory: SecondMidterm_Exam/class18/contador
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir artefacto a Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: SecondMidterm_Exam/class18/contador/dist
+
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
