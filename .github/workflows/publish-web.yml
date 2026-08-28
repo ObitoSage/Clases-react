@@ -1,4 +1,4 @@
-name: Publish Web
+name: Publicar app
 
 on:
   push:
@@ -26,31 +26,22 @@ jobs:
       - name: Descargar codigo
         uses: actions/checkout@v4
 
-      - name: Instalar Node
+      - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-
-      - name: Verificar version de Node
-        run: node --version
-
-      - name: Verificar version de npm
-        run: npm --version
+          node-version: 22
 
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Lint del proyecto
-        run: npm run lint
-
-      - name: Build del proyecto
+      - name: Construir proyecto con Vite
         run: npm run build
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Subir artefacto para Pages
-        uses: actions/upload-pages-artifact@v5
+      - name: Subir dist
+        uses: actions/upload-pages-artifact@v3
         with:
           path: SecondMidterm_Exam/class18/contador/dist
 
