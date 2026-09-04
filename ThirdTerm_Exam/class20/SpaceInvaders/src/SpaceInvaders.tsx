@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import alienImg from './assets/ChatGPT Image Sep 4, 2026, 06_31_34 PM.png';
+import shipImg from './assets/ChatGPT Image Sep 4, 2026, 06_33_28 PM.png';
+import bulletImg from './assets/ChatGPT Image Sep 4, 2026, 06_35_19 PM.png';
 
 type Bloque = {
     x: number
     y: number
 }
 
-const PROPORCION_BLOQUE = 0.07
+const PROPORCION_BLOQUE = 0.10
 const PROPORCION_PROYECTIL = PROPORCION_BLOQUE / 2
 const NUMERO_EXTRATERRESTRES = 5
 const PROPORCION_PASO_BASE = 0.03
@@ -211,35 +214,50 @@ function SpaceInvaders() {
 
     return (
         <>
-            {/* Nave del jugador — sin texto */}
-            <div className="base-jugador" style={{ left: `${posicionBase}px` }} />
+            {/* Nave del jugador */}
+            <img
+                src={shipImg}
+                alt="nave"
+                className="base-jugador"
+                style={{
+                    left: `${posicionBase}px`,
+                    background: 'transparent',
+                    objectFit: 'contain'
+                }}
+            />
 
             {/* Proyectiles */}
             {proyectiles.map((proyectil, indice) => (
-                <div key={indice} style={{
-                    position: 'absolute',
-                    width: `${tamanoProyectil}px`,
-                    height: `${tamanoProyectil * 2.5}px`,
-                    left: `${proyectil.x}px`,
-                    bottom: `${proyectil.y}px`,
-                    background: 'linear-gradient(to top, #facc15, #fde68a)',
-                    borderRadius: '3px',
-                    boxShadow: '0 0 8px #facc15'
-                }} />
+                <img
+                    key={indice}
+                    src={bulletImg}
+                    alt="proyectil"
+                    style={{
+                        position: 'absolute',
+                        width: `${tamanoProyectil}px`,
+                        height: `${tamanoProyectil * 3}px`,
+                        left: `${proyectil.x}px`,
+                        bottom: `${proyectil.y}px`,
+                        objectFit: 'contain'
+                    }}
+                />
             ))}
 
-            {/* Extraterrestres — solo color, sin texto */}
+            {/* Extraterrestres */}
             {extraterrestres.map((bloque, indice) => (
-                <div key={indice} style={{
-                    position: 'absolute',
-                    width: `${tamanoBloque}px`,
-                    height: `${tamanoBloque}px`,
-                    left: `${bloque.x}px`,
-                    top: `${bloque.y}px`,
-                    background: 'linear-gradient(135deg, #a855f7, #7c3aed)',
-                    borderRadius: '6px',
-                    boxShadow: '0 0 12px #a855f7'
-                }} />
+                <img
+                    key={indice}
+                    src={alienImg}
+                    alt="alien"
+                    style={{
+                        position: 'absolute',
+                        width: `${tamanoBloque}px`,
+                        height: `${tamanoBloque}px`,
+                        left: `${bloque.x}px`,
+                        top: `${bloque.y}px`,
+                        objectFit: 'contain'
+                    }}
+                />
             ))}
         </>
     );
