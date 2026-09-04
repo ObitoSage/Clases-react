@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    position: relative;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top, #0d0221 0%, #020010 100%);
+    color: #f0e6ff;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Orbitron', monospace;
+}
+
+/* Subtle stars via pseudo dots */
+.contenedor::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 15% 20%, #ffffff44 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 10%, #ffffff33 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 35%, #ffffff55 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 60%, #ffffff22 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 75%, #ffffff44 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 85%, #ffffff33 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 90%, #ffffff44 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.base-jugador {
+    width: 14vw;
+    height: 6vh;
+    background: linear-gradient(135deg, #06b6d4, #0e7490);
+    box-shadow: 0 0 16px #06b6d4, 0 0 32px #0e749055;
+    border-radius: 6px 6px 0 0;
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1vw;
+    font-weight: bold;
+    color: #e0f2fe;
+    letter-spacing: 0.05em;
+}

@@ -1,0 +1,56 @@
+name: Publicar serpiente en GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "SecondMidterm_Exam/class19-secondtest/snakeGame/**"
+      - ".github/workflows/publish-snake.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: SecondMidterm_Exam/class19-secondtest/snakeGame/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+        working-directory: SecondMidterm_Exam/class19-secondtest/snakeGame
+
+      - name: Construir proyecto con Vite
+        run: npm run build
+        working-directory: SecondMidterm_Exam/class19-secondtest/snakeGame
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir dist
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: SecondMidterm_Exam/class19-secondtest/snakeGame/dist
+
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
